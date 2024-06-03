@@ -98,15 +98,14 @@ class SingleTrain(object):
         self.graphs, self.players, self.rshapers, self.accmeters = [], [], [], []
 
         for i, dataset in enumerate(self.datasets):
-            for index in args.multigraphindex:
-                g = GraphLoader(dataset, sparse=True, args=args, multigraphindex=f'graph{index}')
-                g.process()
-                self.graphs.append(g)
-                p = Player(g, args).cuda()
-                self.players.append(p)
-                self.rshapers.append(RewardShaper(args))
-                self.accmeters.append(AverageMeter("accmeter", ave_step=100))
-                print(f'Training {dataset=}, graph{index}')
+            g = GraphLoader(dataset, sparse=True,args=args, multigraphindex='graph' + str(i + 1))
+            g.process()
+            self.graphs.append(g)
+            p = Player(g, args).cuda()
+            self.players.append(p)
+            self.rshapers.append(RewardShaper(args))
+            self.accmeters.append(AverageMeter("accmeter", ave_step=100))
+            # print(f'Training {dataset=}, graph{index}')
 
         self.env = Env(self.players, args)
         self.tau = 0.005
