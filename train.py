@@ -155,7 +155,7 @@ class SingleTrain(object):
                 #if episode%self.args.logfreq == 0:
                     #logger.info("episode {}, playerid {}, loss {}".format(episode,playerid,loss))
                     #inspect_weight(self.policy)
-                if self.args.sasaveve==1 and self.accmeter.should_save():
+                if self.args.save==1 and self.accmeter.should_save():
                     logger.warning("saving!")
                     torch.save(self.policy.state_dict(),"models/{}.pkl".format(self.args.policynet+self.args.savename))
             if (episode % 1000 == 1):
