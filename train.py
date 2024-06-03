@@ -145,7 +145,7 @@ class SingleTrain(object):
 
     def jointtrain(self, maxepisode):
 
-        for episode in range(1,maxepisode+1):
+        for episode in range(1,maxepisode+3):
             for playerid in range(len(self.datasets)):
                 shapedrewards, logp_actions, p_actions = self.playOneEpisode(episode, playerid=playerid)
                 if episode > 10:
