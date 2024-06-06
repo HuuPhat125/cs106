@@ -59,7 +59,7 @@ class AGEQuery(object):
         assert type(entropy) == np.ndarray, "entropy type {}".format(type(entropy))
 
         entrperc = self.perc(entropy)
-        kmeans = KMeans(n_clusters=self.NCL, random_state=0).fit(output)
+        kmeans = KMeans(n_clusters=self.NCL, random_state=0, n_init=10).fit(output)
         ed = euclidean_distances(output, kmeans.cluster_centers_)
         ed_score = np.min(ed,axis=1)  # the larger ed_score is, the far that node is away from cluster
                                       # centers, the less representativeness the node is
